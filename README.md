@@ -1,10 +1,18 @@
 # just-serve
 
-When you want to say "just serve this directory" and not worry about CORS. For example, my use case was loading a JS script from a local directory in a page running not on localhost. Don't use this in production, obviously.
+When you want to say "just serve this directory" to test something and not worry about CORS.
 
-I was getting tired of existing tools running into a brick wall in the browser due to various CORS issues (and often not having maintainers, which is unfortunate when browser standards evolve). 
+just-serve is specifically designed to solve CORS issues that arise during local development when you need to serve files to web pages running on different origins.
+
+I was getting tired of existing tools running into a brick wall in the browser due to various CORS issues (and often not having maintainers, which is unfortunate when browser standards evolve).
 
 If you need more control, you should probably write your own server.
+
+# Installation
+
+```bash
+cargo install just-serve
+```
 
 # Usage
 
