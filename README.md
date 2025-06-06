@@ -1,5 +1,7 @@
 # just-serve
 
+[![Crates.io](https://img.shields.io/crates/v/just-serve)](https://crates.io/crates/just-serve)
+
 When you want to say "just serve this directory" to test something and not worry about CORS.
 
 just-serve is specifically designed to solve CORS issues that arise during local development when you need to serve files to web pages running on different origins.
