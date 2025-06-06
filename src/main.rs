@@ -7,6 +7,8 @@ use tower_http::services::ServeDir;
 use tower_http::cors::CorsLayer;
 use axum::Router;
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 const HELP: &str = r#"
 just-serve
 A simple HTTP server for serving static files without having to think about CORS.
@@ -19,6 +21,7 @@ OPTIONS:
 
 FLAGS:
     -h, --help       Print help information
+    -V, --version    Print version information
 
 ARGS:
     PATH             Path to serve files from (default: current directory)
@@ -41,6 +44,11 @@ async fn main() {
         return;
     }
 
+    if pargs.contains(["-V", "--version"]) {
+        println!("just-serve {}", VERSION);
+        return;
+    }
+
     let args = AppArgs {
         port: match pargs.opt_value_from_str(["-p", "--port"]) {
             Ok(Some(port)) => port,
@@ -55,17 +63,29 @@ async fn main() {
     };
 
     // Validate that the directory exists and is accessible
-    if !std::path::Path::new(&args.dir).exists() {
+    let dir_path = std::path::Path::new(&args.dir);
+    if !dir_path.exists() {
         eprintln!("Error: Directory '{}' does not exist", args.dir);
         std::process::exit(1);
     }
 
-    if !std::path::Path::new(&args.dir).is_dir() {
+    if !dir_path.is_dir() {
         eprintln!("Error: '{}' is not a directory", args.dir);
         std::process::exit(1);
     }
 
-    let serve_dir = ServeDir::new(&args.dir);
+    // Canonicalize the directory path to get the absolute path
+    let canonical_dir = match dir_path.canonicalize() {
+        Ok(path) => path,
+        Err(e) => {
+            eprintln!("Error: Unable to access directory '{}': {}", args.dir, e);
+            std::process::exit(1);
+        }
+    };
+
+    println!("Serving directory: {}", canonical_dir.display());
+
+    let serve_dir = ServeDir::new(&canonical_dir);
 
     let cors = CorsLayer::very_permissive();
 

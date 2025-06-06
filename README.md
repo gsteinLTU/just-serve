@@ -23,7 +23,8 @@ just-serve
 ```
 
 # Options
-- `-p`, `--port`: Specify the port to serve on (default: 8000).
+- `-p`, `--port`: Specify the port to serve on (default: 8080).
 - `-h`, `--help`: Show help message and exit.
+- `-V`, `--version`: Show version information and exit.
 
 That's all. This is for when you just need to serve a directory right now, to be used by yourself, and you need CORS out of your way.
