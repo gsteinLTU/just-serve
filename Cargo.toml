@@ -2,6 +2,12 @@
 name = "just-serve"
 version = "0.1.0"
 edition = "2024"
+authors = ["Gordon Stein"]
+description = "A simple HTTP server for serving a static directory with CORS support"
+license = "MIT OR Apache-2.0"
+categories = ["server"]
+repository = "https://github.com/gsteinLTU/just-serve"
+readme = "README.md"
 
 [dependencies]
 axum = "0.8.4"

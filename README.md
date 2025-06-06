@@ -1,8 +1,8 @@
 # just-serve
 
-When you want to say "just serve this directory" and not worry about CORS.
+When you want to say "just serve this directory" and not worry about CORS. For example, my use case was loading an script from a local directory in a page running not on localhost. Don't use this in production, obviously.
 
-I was getting tired of everything else running into a brick wall in the browser due to CORS issues. If you need more features, you should probably write your own server.
+I was getting tired of everything else running into a brick wall in the browser due to various CORS issues. If you need more control, you should probably write your own server.
 
 # Usage
 
